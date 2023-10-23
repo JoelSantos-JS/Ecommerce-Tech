@@ -18,6 +18,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @Temporal(TemporalType.TIMESTAMP)
     private Instant moment;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -25,4 +27,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 }
