@@ -7,6 +7,8 @@ import com.joel.br.Ecommerce.Tech.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CategoryServices {
@@ -16,6 +18,9 @@ public class CategoryServices {
 
 
 
+    public List<Category> findAll(){
+        return repository.findAll();
+    }
     public Category create(CategoryDTO category){
 
         Category category1 = mapper.toEntity(category);
