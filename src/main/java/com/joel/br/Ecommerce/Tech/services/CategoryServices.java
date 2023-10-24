@@ -21,9 +21,25 @@ public class CategoryServices {
     public List<Category> findAll(){
         return repository.findAll();
     }
+
+    public Category findById(Long id){
+        return repository.findById(id).get();
+    }
     public Category create(CategoryDTO category){
 
         Category category1 = mapper.toEntity(category);
         return repository.save(category1);
+    }
+
+    public Category update(Long id, CategoryDTO category){
+       Category category1 = findById(id);
+       if(category1 != null){
+           category1.setName(category.getName());
+       }
+        return repository.save(category1);
+    }
+
+    public  void delete(Long id){
+        repository.deleteById(id);
     }
 }

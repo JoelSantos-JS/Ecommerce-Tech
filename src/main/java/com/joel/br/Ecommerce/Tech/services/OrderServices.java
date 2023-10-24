@@ -25,11 +25,34 @@ public class OrderServices {
 		return repository.findAll();
 
     }
+
+
+    public Order findById(Long id) {
+        return  repository.findById(id).get();
+    }
+
+
     public Order createOrder(OrderDTO order){
         order.setMoment(Instant.now());
 
         Order order1 = mapper.toEntity(order);
 
         return repository.save(order1);
+    }
+
+
+    public Order updateOrder(Long id,OrderDTO order){
+        Order order1 = findById(id);
+        if(order1 != null){
+            order.setStatus(order.getStatus());
+            order1.setMoment(Instant.now());
+
+            return repository.save(order1);
+        }
+        return null;
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
     }
 }
